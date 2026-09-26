@@ -174,22 +174,6 @@ try {
 }
 ```
 
-## 검증 결과 및 알려진 문제
-
-JAR를 참조하는 별도 Java 프로그램에서 Spring 없는 사용과 Spring Boot 2.7.18 자동 설정을 검증했습니다. 기본 URL을 별도로 지정한 실제 API 호출에서는 삼성전자 2023년 배당 데이터 15건을 조회했습니다.
-
-현재 확인된 문제는 다음과 같습니다.
-
-| 문제 | 현재 사용 방법 |
-| --- | --- |
-| 기본 URL과 서비스 경로의 `/api` 중복 | `baseUrl` 또는 `dart.api.base-url`을 `https://opendart.fss.or.kr`로 설정 |
-| 배당 DTO의 `getCorpName()`이 회사명을 숫자로 변환해 `null` 반환 | `getCorpNameRaw()` 사용 |
-| 배당 DTO의 `getCorpCode()`이 앞자리 0을 제거 | `getCorpCodeRaw()` 사용 |
-
-모의 서버 검사 10개 중 7개가 통과했고 위 문제에 해당하는 3개가 실패했습니다. 전체 API와 DTO의 동작을 모두 검증한 것은 아닙니다. 재실행 방법과 상세 결과는 [JAR 사용 검증 문서](tests/jar-consumer/README.md)를 참고하세요.
-
 ## 문서
 
 - [API 사용 가이드](API_GUIDE.md): 분야별 메서드, 파라미터, 오류 코드
-- [데이터 전처리 문서](docs/PROCESSING.md): 응답 데이터 변환 규칙
-- [JAR 사용 검증](tests/jar-consumer/README.md): 테스트 결과 및 재실행 명령
